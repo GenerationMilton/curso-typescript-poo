@@ -11,13 +11,25 @@ export class ProductHttpService implements ProductService{
     const { data } = await axios.get<Product[]>(this.URL);
     return data;
   }
-  update(id: number, changes: UpdateProductDto): Product {
-    throw new Error("Method not implemented.");
+  async update(id: Product['id'], changes: UpdateProductDto) {
+    const { data } = await axios.put(`${URL}/${id}`, changes);
+    return data;
   }
-  create(dto: CreateProductDto): Product {
-    throw new Error("Method not implemented.");
+  async create(dto: CreateProductDto) {
+    const { data } = await axios.post(`${URL}/${dto}`);
+    return data;
   }
-  findOne(id: number): Product | undefined {
-    throw new Error("Method not implemented.");
+  async findOne(id: Product['id']) {
+    const { data } = await axios.get(`${URL}/${id}`);
+    return data;
+  }
+  async add(product: Product) {
+    const { data } = await axios.post(`${URL}/${product}`);
+    return data;
+  }
+
+  async delete(id: Product['id']) {
+    const { data } = await axios.delete(`${URL}/${id}`);
+    return data;
   }
 }
